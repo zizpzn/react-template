@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
+import styles from "./App.module.css";
+import SearchHeader from "./components/search_header/SearchHeader";
 import VideoList from "./components/video_list/VideoList";
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
     };
 
     fetch(
-      "https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=AIzaSyD5PE2WWsgT2UMXlyCT4GxWB_baAHfVcK0",
+      "https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=30&key=AIzaSyD5PE2WWsgT2UMXlyCT4GxWB_baAHfVcK0",
       requestOptions
     )
       .then((response) => response.json())
@@ -20,7 +21,12 @@ function App() {
       .catch((error) => console.log("error", error));
   }, []);
 
-  return <VideoList videos={videos} />;
+  return (
+    <div className={styles.app}>
+      <SearchHeader />
+      <VideoList videos={videos} />
+    </div>
+  );
 }
 
 export default App;
